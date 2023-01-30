@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+  font-family: "Lato", sans-serif;
+      transition: background-color .5s;
+background-image:url(/media/media/6.jpg)
+  }
+
+.linear-wipe {
+ font-size: 450%; font-family:Showcard Gothic;  margin-top:2%;
+  background: linear-gradient(to right, #0C0 20%, #F00 40%, #0F6 60%, #009 80%);
+  background-size: 200% auto;
+    text-align: center;
+  color: #000;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+animation: shine 2s linear infinite;}
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+  a{ color:#906; font-family: Arial, Helvetica, sans-serif;}
+  a:hover{ color: #C03; font-family:Algerian;}
+ p{ color:#906; font-family: "Bookman Old Style"; font-size: 30px}
+  h1{ color: #C03; font-family:Algerian;}
+  .img-fluid{
+      margin-left: 5%; margin-bottom: 2%; margin-top: 2%;
+      width:30%; height: 300px;
+  }
+.box:hover{filter:grayscale(80%); transform:scale(1.1);}
+.light{ filter:grayscale(0); transition:1s;}
+
+.a{
+    border-color: #be26b3; border-width:5px; border-style:solid;
+    padding-left:90px; padding:40px 50px; border-radius:3px;
+}  .c {
+    border-width: 3px;
+    border-color: #c39;
+    border-style: solid;
+    text-align: center;
+    padding: 1px 0;
+    border-radius: 1px 1px;
+    color: #d70f62;
+}
+
+</style>
+{% endblock head %}
+{% block body %}
+    <div class="col-md-12 ri">
+<p class="linear-wipe"> Welcome to Social Book {{ request.user }}</p>
+</div>
+<div class="container-fluid">
+        {% for post in post %}
+        <div class= "a" style="text-align: center;">
+         <h1 class= "c">{{post.user}}</h1>
+        {% if user.is_authenticated %}
+         <p class="font-size-regular c ">{{post.post_title}}</p>
+        <p class= "c">{{post.post_desc}}</p>
+            <p class= "c"><a  href="{% url 'edit' post.pk %}">Edit</a></p>
+            <p class="c"><a href="{% url 'delete' post.pk %}">Delete</a></p>
+        <img src="{{post.image.url}}" alt="Image"  class="img-fluid light box" data-lightbox="mygallary">
+          </div>
+            <br/>
+            <br/>
+        {% else %}
+        <p>Register/Login to know more</p>
+        {% endif %}
+        {% endfor %}
+
+</div>
+{% endblock body %}

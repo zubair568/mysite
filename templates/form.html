@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block head %}
+    <style>
+body{background-image:url(/media/media/6.jpg)}
+form{
+font-size: 35px ;
+color: darkslateblue;
+width: 60%; margin-left:35%;
+font-style: oblique;
+font-family: "Century Gothic"}
+
+.ri{
+    font-family:Algerian; font-size:35px;
+  color: purple;
+  text-align:center;
+  marquee-style:slide;
+  marquee-direction:forward;
+}
+ </style>
+{% endblock head %}
+{% block body %}
+<div class="img">
+<div class="ri">
+    <marquee>
+    <h1 align="center" >{{ request.user }}'s Social Book</h1>
+    </marquee>
+</div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Submit</button>
+    </form>
+<div>
+    {% for messages in messages %}
+    <h3 style="text-align: center; font-size: 25px"> {{messages}} </h3>
+    {% endfor %}
+</div>
+</div>
+{% endblock body %}

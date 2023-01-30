@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+  font-family: "Lato", sans-serif;
+      transition: background-color .5s;
+background-image:url(/media/media/6.jpg)
+  }
+
+.linear-wipe {
+ font-size: 450%; font-family:Showcard Gothic;  margin-top:2%;
+  background: linear-gradient(to right, #0C0 20%, #F00 40%, #0F6 60%, #009 80%);
+  background-size: 200% auto;
+    text-align: center;
+  color: #000;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+animation: shine 2s linear infinite;}
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+  form{
+font-size: 30px ;
+color: darkslateblue;
+width: 60%; margin-left:35%;
+font-style: oblique;
+font-family: "Century Gothic"}
+
+</style>
+{% endblock head %}
+{% block body %}
+    <div class="col-md-12 ri">
+<p class="linear-wipe"> Welcome to Social Book {{ request.user }}</p>
+</div>
+<div class="container-fluid">
+ <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% endblock body %}
